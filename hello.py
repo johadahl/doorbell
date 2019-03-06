@@ -2,7 +2,7 @@ from flask import Flask
 from twilio.twiml.voice_response import VoiceResponse, Dial, Play
 
 app = Flask(__name__)
-home = False
+home = True
 
 @app.route('/')
 def hello_world():
