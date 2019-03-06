@@ -16,5 +16,11 @@ def answer_call():
 
     return str(resp)
 
+
+@app.route("/", methods=['GET', 'POST'])
+def redirect():
+	return redirect("http://www.jdahl.io", code=302)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
