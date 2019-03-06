@@ -1,2 +1,1 @@
-# Deploy! :star: :sparkling_heart: :sparkles:
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+Lightweight flask API to hande Twilio request to open the front-door.
