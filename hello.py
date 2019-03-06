@@ -6,7 +6,7 @@ home = False
 
 @app.route('/')
 def hello_world():
-    return 'Hello world'
+    return 'Home:' + str(home)
 
 # Respond to incoming phone calls with a brief message.
 @app.route("/answer", methods=['GET', 'POST'])
@@ -19,7 +19,7 @@ def answer_call():
 	    resp.say("Welcome. Proceed to the fifth floor", voice='alice', language='en-EN')
 	    resp.play('', digits='w*')
     else:
-    	resp.say("Hello. Noone is home right now. Please call 0 7 0 7 4 4 7 4 1 3 if you need to be let inside. Thank you", voice='alice', language='en-EN')
+    	resp.say("Hello. Dahl is home right now. Please call 0. 7. 0. 7. 4. 4. 7. 4. 1. 3. if you need to be let inside. Thank you", voice='alice', language='en-EN')
     return str(resp)
 
 if __name__ == '__main__':
