@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<div id="inner">
+		    <a href="/toggle">
+		    	<button type="button">Toggle
+		    	</button>
+		    </a>
+		    <div> 
+		    	<h1>
+		    		Home: <span id="bool">{{ is_home }}</span>
+		    	</h1>
+	    	</div>
+		</div>
+	</body>
+	<script>
+		var status = document.getElementById("bool").innerText;
+		if (status == "True") {
+			document.body.style.backgroundColor = "#b2ffbf";
+		}
+		else if (status == "False") {
+			document.body.style.backgroundColor = "#ff9191";	
+		}
+	</script>
+</html>
+
+<style>
+#inner {
+	text-align: center
+}
+h1 {
+	font-family: Arial, Geneva, Helvetica;
+}
+button {
+	background-color: #000;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+</style>
