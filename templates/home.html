@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <head>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-      <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-      <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    </head>
-    <input type="checkbox" class='toggle' checked data-toggle="toggle">
-    <div class='status'>Home</div>
-    <div> 
-    	Home: {{ is_home }}
-    </div>
-  </body>
+	<body>
+		<div id="inner">
+		    <a href="/toggle">
+		    	<button type="button">Toggle
+		    	</button>
+		    </a>
+		    <div> 
+		    	<h1>
+		    		Home: <span id="bool">{{ is_home }}</span>
+		    	</h1>
+	    	</div>
+		</div>
+	</body>
 	<script>
-		$(document).ready(function() {
-		$('.toggle').click(function() {
-			var current_status = $('.status').text();
-			$.ajax({
-				url: "/get_toggled_status",
-				type: "get",
-				data: {status: current_status},
-				success: function(response) {
-					$(".status").html(response);
-				},
-				error: function(xhr) {
-				//Do Something to handle error
-				}
-			});
-		});
-	});
+		var status = document.getElementById("bool").innerText;
+		if (status == "True") {
+			document.body.style.backgroundColor = "#b2ffbf";
+		}
+		else if (status == "False") {
+			document.body.style.backgroundColor = "#ff9191";	
+		}
 	</script>
 </html>
 
 <style>
-h1 {
-	font-family: Arial, Geneva, Helvetica, sans-serif;
+#inner {
+	text-align: center
 }
-
-
+h1 {
+	font-family: Arial, Geneva, Helvetica;
+}
+button {
+	background-color: #000;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
 </style>
