@@ -25,7 +25,7 @@ def answer_call():
 	    resp.say('Welcome. Proceed to the fifth floor', voice='alice', language='en-EN')
 	    resp.play('', digits='w*')
     else:
-    	resp.say('Hello. Dahl is not home right now. Please call Johan on 0. 7. 0. 7. 4. 4. 7. 4. 1. 3. if you need to be let inside. Thank you', voice='alice', language='en-EN')
+    	resp.say('Hello. Automatic entry is not activated. Please call Johan if you need to be let inside. Thank you.', voice='alice', language='en-EN')
     return str(resp)
 
 # Toggles status and updates persistant storage
