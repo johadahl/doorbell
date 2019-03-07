@@ -15,6 +15,18 @@ def toggle_status():
 	return render_template('home.html', is_home = is_home())
 
 
+# Handles IFTTT activate - Turn on automatic opening
+@app.route('/ifttt/v1/actions/activate')
+def activate():
+	if not is_home():
+		toggle_home()
+
+# Handles IFTTT deactivate - Turn off automatic opening
+@app.route('/ifttt/v1/actions/deactivate')
+def deactivate():
+	if is_home():
+		toggle_home()
+
 # Respond to incoming phone calls with a brief message.
 @app.route('/answer', methods=['GET', 'POST'])
 def answer_call():
