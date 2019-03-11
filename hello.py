@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+import datetime
+from flask import Flask, request, render_template, jsonify
 from twilio.twiml.voice_response import VoiceResponse, Dial, Play
 
 app = Flask(__name__)
@@ -12,33 +13,41 @@ def hello_world():
 @app.route('/toggle') 
 def toggle_status():
 	toggle_home()
+	log("toggled. Home is now: " + str(is_home()))
 	return render_template('home.html', is_home = is_home())
 
 
 # Handles IFTTT activate - Turn on automatic opening
-@app.route('/ifttt/v1/actions/activate')
+@app.route('/api/ifttt/v1/actions/activate')
 def activate():
+	log("activate")
 	if not is_home():
 		toggle_home()
+#	return jsonify({"status_code" : 200, "data" : [{"id" : 1,},]}) 
 
 # Handles IFTTT deactivate - Turn off automatic opening
-@app.route('/ifttt/v1/actions/deactivate')
+@app.route('/api/ifttt/v1/actions/deactivate')
 def deactivate():
+	log("deactivate")
 	if is_home():
 		toggle_home()
+#	return jsonify({"status_code" : 200, "data" : [{"id" : 1,},]})
+
+
 
 # Respond to incoming phone calls with a brief message.
 @app.route('/answer', methods=['GET', 'POST'])
 def answer_call():
-    # Start our TwiML response
-    resp = VoiceResponse()
-    # Read a message aloud to the caller
-    if is_home():
-	    resp.say('Welcome. Proceed to the fifth floor', voice='alice', language='en-EN')
-	    resp.play('', digits='w*')
-    else:
-    	resp.say('Hello. Automatic entry is not activated. Please call Johan if you need to be let inside. Thank you.', voice='alice', language='en-EN')
-    return str(resp)
+	log("answered call, home is now: " + str(is_home()))
+	# Start our TwiML response
+	resp = VoiceResponse()
+	# Read a message aloud to the caller
+	if is_home():
+		resp.say('Welcome. Proceed to the fifth floor', voice='alice', language='en-EN')
+		resp.play('', digits='w*')
+	else:
+		resp.say('Hello. Automatic entry is not activated. Please call Johan if you need to be let inside. Thank you.', voice='alice', language='en-EN')
+	return str(resp)
 
 # Toggles status and updates persistant storage
 def toggle_home():
@@ -63,5 +72,14 @@ def is_home():
 	else:
 		return False
 
+# Adds message with timestamp to log
+def log(message):
+	f = open("log.txt", "a")
+	s = "\n" + str(datetime.datetime.now()) + ", " + message
+	f.write(s)
+	f.close()
+
 if __name__ == '__main__':
     app.run()
+
+
